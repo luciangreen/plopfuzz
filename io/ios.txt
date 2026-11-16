@@ -1,0 +1,402 @@
+plopfuzz: 200 inputs and outputs, from real runs (io/ios.pl has the same as Prolog facts).
+
+1. fuzz([const(1),plus(1,0)], swap2, 2)
+   => [0-fails([0,0],want(0),got(1)),1-fails([0,1],want(0),got(1))]
+2. fuzz_char(plus(1,0), 0, double_first, 2)
+   => fails([0,1],want(0),got(1))
+3. fuzz([plus(1,1),const(2)], copy, 2)
+   => [0-fails([0,1],want(0),got(2)),1-fails([0,0],want(0),got(2))]
+4. fuzz_char(shift(1,4), 0, sum_and_first, 2)
+   => fails([0,0],want(0),got(4))
+5. fuzz([plus(0,0),in(0)], swap2, 2)
+   => [0-fails([0,1],want(1),got(0)),1-clean]
+6. fuzz_char(plus(1,1), 1, double_first, 2)
+   => fails([0,1],want(0),got(2))
+7. fuzz([plus(0,1),in(1)], swap2, 2)
+   => [0-fails([1,0],want(0),got(1)),1-fails([0,1],want(0),got(1))]
+8. fuzz_char(plus(1,0), 0, sum_and_first, 2)
+   => clean
+9. fuzz([shift(1,2),in(1)], double_first, 2)
+   => [0-fails([0,0],want(0),got(2)),1-fails([0,1],want(0),got(1))]
+10. fuzz_char(const(6), 1, sum_and_first, 2)
+   => fails([0,0],want(0),got(6))
+11. fuzz([shift(0,5),const(3)], copy, 2)
+   => [0-fails([0,0],want(0),got(5)),1-fails([0,0],want(0),got(3))]
+12. fuzz_char(shift(1,4), 1, swap2, 2)
+   => fails([0,0],want(0),got(4))
+13. fuzz([plus(1,1),plus(1,0)], double_first, 2)
+   => [0-fails([0,1],want(0),got(2)),1-fails([0,1],want(0),got(1))]
+14. fuzz_char(shift(1,5), 0, swap2, 2)
+   => fails([0,0],want(0),got(5))
+15. fuzz([in(1),shift(0,8)], copy, 2)
+   => [0-fails([0,1],want(0),got(1)),1-fails([0,0],want(0),got(8))]
+16. fuzz_char(in(1), 0, swap2, 2)
+   => clean
+17. fuzz([in(1),const(1)], swap2, 2)
+   => [0-clean,1-fails([0,0],want(0),got(1))]
+18. fuzz_char(in(0), 0, copy, 2)
+   => clean
+19. fuzz([const(7),plus(0,0)], sum_and_first, 2)
+   => [0-fails([0,0],want(0),got(7)),1-fails([1,0],want(1),got(2))]
+20. fuzz_char(shift(0,8), 0, copy, 2)
+   => fails([0,0],want(0),got(8))
+21. fuzz([in(0),plus(1,0)], double_first, 2)
+   => [0-fails([1,0],want(2),got(1)),1-fails([0,1],want(0),got(1))]
+22. fuzz_char(plus(0,1), 1, swap2, 2)
+   => fails([0,1],want(0),got(1))
+23. fuzz([const(6),const(5)], swap2, 2)
+   => [0-fails([0,0],want(0),got(6)),1-fails([0,0],want(0),got(5))]
+24. fuzz_char(const(6), 0, sum_and_first, 2)
+   => fails([0,0],want(0),got(6))
+25. fuzz([plus(1,1),shift(0,3)], copy, 2)
+   => [0-fails([0,1],want(0),got(2)),1-fails([0,0],want(0),got(3))]
+26. fuzz_char(plus(0,0), 0, sum_and_first, 2)
+   => fails([0,1],want(1),got(0))
+27. fuzz([in(0),in(1)], sum_and_first, 2)
+   => [0-fails([0,1],want(1),got(0)),1-fails([0,1],want(0),got(1))]
+28. fuzz_char(in(0), 1, double_first, 2)
+   => fails([1,0],want(2),got(1))
+29. fuzz([const(6),in(1)], swap2, 2)
+   => [0-fails([0,0],want(0),got(6)),1-fails([0,1],want(0),got(1))]
+30. fuzz_char(plus(0,0), 0, swap2, 2)
+   => fails([0,1],want(1),got(0))
+31. fuzz([plus(0,1),plus(1,0)], sum_and_first, 2)
+   => [0-clean,1-fails([0,1],want(0),got(1))]
+32. fuzz_char(in(0), 1, copy, 2)
+   => fails([0,1],want(1),got(0))
+33. fuzz([const(1),const(8)], sum_and_first, 2)
+   => [0-fails([0,0],want(0),got(1)),1-fails([0,0],want(0),got(8))]
+34. fuzz_char(shift(1,8), 0, swap2, 2)
+   => fails([0,0],want(0),got(8))
+35. fuzz([const(7),shift(0,1)], double_first, 2)
+   => [0-fails([0,0],want(0),got(7)),1-fails([0,0],want(0),got(1))]
+36. fuzz_char(const(1), 1, copy, 2)
+   => fails([0,0],want(0),got(1))
+37. fuzz([in(0),const(4)], sum_and_first, 2)
+   => [0-fails([0,1],want(1),got(0)),1-fails([0,0],want(0),got(4))]
+38. fuzz_char(shift(0,1), 0, double_first, 2)
+   => fails([0,0],want(0),got(1))
+39. fuzz([const(8),shift(1,5)], copy, 2)
+   => [0-fails([0,0],want(0),got(8)),1-fails([0,0],want(0),got(5))]
+40. fuzz_char(plus(1,0), 1, swap2, 2)
+   => fails([0,1],want(0),got(1))
+41. fuzz([shift(0,3),shift(1,5)], copy, 2)
+   => [0-fails([0,0],want(0),got(3)),1-fails([0,0],want(0),got(5))]
+42. fuzz_char(shift(1,9), 1, double_first, 2)
+   => fails([0,0],want(0),got(9))
+43. fuzz([shift(1,9),in(0)], copy, 2)
+   => [0-fails([0,0],want(0),got(9)),1-fails([0,1],want(1),got(0))]
+44. fuzz_char(plus(0,1), 0, swap2, 2)
+   => fails([1,0],want(0),got(1))
+45. fuzz([const(4),in(0)], sum_and_first, 2)
+   => [0-fails([0,0],want(0),got(4)),1-clean]
+46. fuzz_char(plus(0,0), 0, sum_and_first, 2)
+   => fails([0,1],want(1),got(0))
+47. fuzz([const(4),shift(1,3)], double_first, 2)
+   => [0-fails([0,0],want(0),got(4)),1-fails([0,0],want(0),got(3))]
+48. fuzz_char(const(3), 0, double_first, 2)
+   => fails([0,0],want(0),got(3))
+49. fuzz([plus(1,0),const(7)], swap2, 2)
+   => [0-fails([1,0],want(0),got(1)),1-fails([0,0],want(0),got(7))]
+50. fuzz_char(plus(0,0), 1, double_first, 2)
+   => clean
+51. fuzz([plus(1,0),plus(1,1)], sum_and_first, 2)
+   => [0-clean,1-fails([0,1],want(0),got(2))]
+52. fuzz_char(shift(1,9), 1, copy, 2)
+   => fails([0,0],want(0),got(9))
+53. fuzz([in(0),const(9)], double_first, 2)
+   => [0-fails([1,0],want(2),got(1)),1-fails([0,0],want(0),got(9))]
+54. fuzz_char(const(5), 0, double_first, 2)
+   => fails([0,0],want(0),got(5))
+55. fuzz([shift(0,9),plus(1,0)], double_first, 2)
+   => [0-fails([0,0],want(0),got(9)),1-fails([0,1],want(0),got(1))]
+56. fuzz_char(shift(0,9), 1, sum_and_first, 2)
+   => fails([0,0],want(0),got(9))
+57. fuzz([const(8),in(0)], sum_and_first, 2)
+   => [0-fails([0,0],want(0),got(8)),1-clean]
+58. fuzz_char(const(6), 0, copy, 2)
+   => fails([0,0],want(0),got(6))
+59. fuzz([plus(1,0),const(1)], swap2, 2)
+   => [0-fails([1,0],want(0),got(1)),1-fails([0,0],want(0),got(1))]
+60. fuzz_char(in(0), 1, copy, 2)
+   => fails([0,1],want(1),got(0))
+61. fuzz([plus(1,1),in(1)], copy, 2)
+   => [0-fails([0,1],want(0),got(2)),1-clean]
+62. fuzz_char(plus(1,1), 1, swap2, 2)
+   => fails([0,1],want(0),got(2))
+63. fuzz([in(0),in(0)], copy, 2)
+   => [0-clean,1-fails([0,1],want(1),got(0))]
+64. fuzz_char(shift(1,8), 1, copy, 2)
+   => fails([0,0],want(0),got(8))
+65. fuzz([in(1),shift(1,4)], double_first, 2)
+   => [0-fails([0,1],want(0),got(1)),1-fails([0,0],want(0),got(4))]
+66. fuzz_char(shift(1,2), 1, swap2, 2)
+   => fails([0,0],want(0),got(2))
+67. fuzz([in(0),plus(0,1)], sum_and_first, 2)
+   => [0-fails([0,1],want(1),got(0)),1-fails([0,1],want(0),got(1))]
+68. fuzz_char(plus(1,0), 0, double_first, 2)
+   => fails([0,1],want(0),got(1))
+69. fuzz([plus(1,0),plus(0,1)], swap2, 2)
+   => [0-fails([1,0],want(0),got(1)),1-fails([0,1],want(0),got(1))]
+70. fuzz_char(in(0), 0, swap2, 2)
+   => fails([0,1],want(1),got(0))
+71. fuzz([const(5),plus(1,0)], sum_and_first, 2)
+   => [0-fails([0,0],want(0),got(5)),1-fails([0,1],want(0),got(1))]
+72. fuzz_char(plus(1,1), 0, copy, 2)
+   => fails([0,1],want(0),got(2))
+73. fuzz([in(0),plus(0,0)], swap2, 2)
+   => [0-fails([0,1],want(1),got(0)),1-fails([1,0],want(1),got(2))]
+74. fuzz_char(const(6), 1, swap2, 2)
+   => fails([0,0],want(0),got(6))
+75. fuzz([shift(1,5),shift(0,2)], swap2, 2)
+   => [0-fails([0,0],want(0),got(5)),1-fails([0,0],want(0),got(2))]
+76. fuzz_char(in(0), 0, swap2, 2)
+   => fails([0,1],want(1),got(0))
+77. fuzz([in(0),plus(0,1)], copy, 2)
+   => [0-clean,1-fails([1,0],want(0),got(1))]
+78. fuzz_char(in(0), 1, double_first, 2)
+   => fails([1,0],want(2),got(1))
+79. fuzz([const(5),plus(0,1)], copy, 2)
+   => [0-fails([0,0],want(0),got(5)),1-fails([1,0],want(0),got(1))]
+80. fuzz_char(plus(1,1), 1, copy, 2)
+   => fails([0,1],want(1),got(2))
+81. fuzz([shift(1,1),plus(0,0)], swap2, 2)
+   => [0-fails([0,0],want(0),got(1)),1-fails([1,0],want(1),got(2))]
+82. fuzz_char(const(9), 0, copy, 2)
+   => fails([0,0],want(0),got(9))
+83. fuzz([shift(0,7),plus(1,0)], sum_and_first, 2)
+   => [0-fails([0,0],want(0),got(7)),1-fails([0,1],want(0),got(1))]
+84. fuzz_char(plus(1,1), 1, sum_and_first, 2)
+   => fails([0,1],want(0),got(2))
+85. fuzz([in(0),in(1)], double_first, 2)
+   => [0-fails([1,0],want(2),got(1)),1-fails([0,1],want(0),got(1))]
+86. fuzz_char(in(1), 0, sum_and_first, 2)
+   => fails([1,0],want(1),got(0))
+87. fuzz([const(5),plus(1,1)], sum_and_first, 2)
+   => [0-fails([0,0],want(0),got(5)),1-fails([0,1],want(0),got(2))]
+88. fuzz_char(const(5), 0, copy, 2)
+   => fails([0,0],want(0),got(5))
+89. fuzz([shift(0,5),plus(0,0)], double_first, 2)
+   => [0-fails([0,0],want(0),got(5)),1-clean]
+90. fuzz_char(const(1), 0, swap2, 2)
+   => fails([0,0],want(0),got(1))
+91. fuzz([const(5),plus(0,1)], copy, 2)
+   => [0-fails([0,0],want(0),got(5)),1-fails([1,0],want(0),got(1))]
+92. fuzz_char(const(8), 0, double_first, 2)
+   => fails([0,0],want(0),got(8))
+93. fuzz([shift(0,9),in(1)], sum_and_first, 2)
+   => [0-fails([0,0],want(0),got(9)),1-fails([0,1],want(0),got(1))]
+94. fuzz_char(plus(1,1), 1, swap2, 2)
+   => fails([0,1],want(0),got(2))
+95. fuzz([shift(0,6),plus(1,0)], copy, 2)
+   => [0-fails([0,0],want(0),got(6)),1-fails([1,0],want(0),got(1))]
+96. fuzz_char(plus(0,0), 1, sum_and_first, 2)
+   => fails([1,0],want(1),got(2))
+97. fuzz([in(1),plus(1,1)], copy, 2)
+   => [0-fails([0,1],want(0),got(1)),1-fails([0,1],want(1),got(2))]
+98. fuzz_char(in(0), 0, swap2, 2)
+   => fails([0,1],want(1),got(0))
+99. fuzz([shift(0,1),in(1)], swap2, 2)
+   => [0-fails([0,0],want(0),got(1)),1-fails([0,1],want(0),got(1))]
+100. fuzz_char(shift(0,9), 0, sum_and_first, 2)
+   => fails([0,0],want(0),got(9))
+101. fuzz([in(1),shift(1,5)], double_first, 2)
+   => [0-fails([0,1],want(0),got(1)),1-fails([0,0],want(0),got(5))]
+102. fuzz_char(plus(1,0), 1, copy, 2)
+   => fails([1,0],want(0),got(1))
+103. fuzz([const(6),in(1)], double_first, 2)
+   => [0-fails([0,0],want(0),got(6)),1-fails([0,1],want(0),got(1))]
+104. fuzz_char(plus(1,1), 1, double_first, 2)
+   => fails([0,1],want(0),got(2))
+105. fuzz([in(1),plus(0,0)], double_first, 2)
+   => [0-fails([0,1],want(0),got(1)),1-clean]
+106. fuzz_char(plus(1,0), 1, copy, 2)
+   => fails([1,0],want(0),got(1))
+107. fuzz([shift(0,4),shift(1,3)], double_first, 2)
+   => [0-fails([0,0],want(0),got(4)),1-fails([0,0],want(0),got(3))]
+108. fuzz_char(plus(1,1), 0, swap2, 2)
+   => fails([0,1],want(1),got(2))
+109. fuzz([shift(1,9),in(0)], swap2, 2)
+   => [0-fails([0,0],want(0),got(9)),1-clean]
+110. fuzz_char(plus(1,1), 1, copy, 2)
+   => fails([0,1],want(1),got(2))
+111. fuzz([plus(1,1),plus(1,1)], double_first, 2)
+   => [0-fails([0,1],want(0),got(2)),1-fails([0,1],want(0),got(2))]
+112. fuzz_char(shift(0,5), 1, swap2, 2)
+   => fails([0,0],want(0),got(5))
+113. fuzz([const(6),plus(0,1)], double_first, 2)
+   => [0-fails([0,0],want(0),got(6)),1-fails([0,1],want(0),got(1))]
+114. fuzz_char(in(0), 1, swap2, 2)
+   => clean
+115. fuzz([in(0),plus(0,1)], double_first, 2)
+   => [0-fails([1,0],want(2),got(1)),1-fails([0,1],want(0),got(1))]
+116. fuzz_char(plus(1,1), 0, double_first, 2)
+   => fails([0,1],want(0),got(2))
+117. fuzz([in(0),shift(0,3)], double_first, 2)
+   => [0-fails([1,0],want(2),got(1)),1-fails([0,0],want(0),got(3))]
+118. fuzz_char(in(1), 1, swap2, 2)
+   => fails([0,1],want(0),got(1))
+119. fuzz([plus(1,1),shift(1,7)], copy, 2)
+   => [0-fails([0,1],want(0),got(2)),1-fails([0,0],want(0),got(7))]
+120. fuzz_char(shift(0,7), 1, copy, 2)
+   => fails([0,0],want(0),got(7))
+121. fuzz([plus(1,1),shift(0,5)], double_first, 2)
+   => [0-fails([0,1],want(0),got(2)),1-fails([0,0],want(0),got(5))]
+122. fuzz_char(const(8), 0, double_first, 2)
+   => fails([0,0],want(0),got(8))
+123. fuzz([shift(0,3),in(0)], double_first, 2)
+   => [0-fails([0,0],want(0),got(3)),1-fails([1,0],want(2),got(1))]
+124. fuzz_char(const(5), 0, copy, 2)
+   => fails([0,0],want(0),got(5))
+125. fuzz([in(1),in(0)], double_first, 2)
+   => [0-fails([0,1],want(0),got(1)),1-fails([1,0],want(2),got(1))]
+126. fuzz_char(shift(0,6), 0, double_first, 2)
+   => fails([0,0],want(0),got(6))
+127. fuzz([plus(0,1),shift(0,2)], copy, 2)
+   => [0-fails([0,1],want(0),got(1)),1-fails([0,0],want(0),got(2))]
+128. fuzz_char(const(6), 1, sum_and_first, 2)
+   => fails([0,0],want(0),got(6))
+129. fuzz([shift(1,7),in(0)], double_first, 2)
+   => [0-fails([0,0],want(0),got(7)),1-fails([1,0],want(2),got(1))]
+130. fuzz_char(const(1), 1, swap2, 2)
+   => fails([0,0],want(0),got(1))
+131. fuzz([plus(1,0),plus(1,0)], double_first, 2)
+   => [0-fails([0,1],want(0),got(1)),1-fails([0,1],want(0),got(1))]
+132. fuzz_char(const(8), 1, copy, 2)
+   => fails([0,0],want(0),got(8))
+133. fuzz([const(6),in(0)], copy, 2)
+   => [0-fails([0,0],want(0),got(6)),1-fails([0,1],want(1),got(0))]
+134. fuzz_char(shift(1,3), 0, copy, 2)
+   => fails([0,0],want(0),got(3))
+135. fuzz([const(5),shift(1,2)], swap2, 2)
+   => [0-fails([0,0],want(0),got(5)),1-fails([0,0],want(0),got(2))]
+136. fuzz_char(plus(0,0), 1, swap2, 2)
+   => fails([1,0],want(1),got(2))
+137. fuzz([in(0),const(8)], copy, 2)
+   => [0-clean,1-fails([0,0],want(0),got(8))]
+138. fuzz_char(in(0), 1, sum_and_first, 2)
+   => clean
+139. fuzz([shift(0,8),plus(1,1)], double_first, 2)
+   => [0-fails([0,0],want(0),got(8)),1-fails([0,1],want(0),got(2))]
+140. fuzz_char(const(2), 1, swap2, 2)
+   => fails([0,0],want(0),got(2))
+141. fuzz([plus(0,1),plus(0,0)], swap2, 2)
+   => [0-fails([1,0],want(0),got(1)),1-fails([1,0],want(1),got(2))]
+142. fuzz_char(in(0), 1, double_first, 2)
+   => fails([1,0],want(2),got(1))
+143. fuzz([shift(1,7),plus(0,1)], copy, 2)
+   => [0-fails([0,0],want(0),got(7)),1-fails([1,0],want(0),got(1))]
+144. fuzz_char(in(1), 1, sum_and_first, 2)
+   => fails([0,1],want(0),got(1))
+145. fuzz([plus(0,0),shift(1,2)], double_first, 2)
+   => [0-clean,1-fails([0,0],want(0),got(2))]
+146. fuzz_char(shift(0,8), 0, sum_and_first, 2)
+   => fails([0,0],want(0),got(8))
+147. fuzz([plus(1,1),shift(0,9)], double_first, 2)
+   => [0-fails([0,1],want(0),got(2)),1-fails([0,0],want(0),got(9))]
+148. fuzz_char(const(6), 1, swap2, 2)
+   => fails([0,0],want(0),got(6))
+149. fuzz([in(1),plus(1,1)], double_first, 2)
+   => [0-fails([0,1],want(0),got(1)),1-fails([0,1],want(0),got(2))]
+150. fuzz_char(shift(0,1), 1, double_first, 2)
+   => fails([0,0],want(0),got(1))
+151. fuzz([in(0),in(1)], swap2, 2)
+   => [0-fails([0,1],want(1),got(0)),1-fails([0,1],want(0),got(1))]
+152. fuzz_char(const(8), 1, swap2, 2)
+   => fails([0,0],want(0),got(8))
+153. fuzz([in(1),in(1)], swap2, 2)
+   => [0-clean,1-fails([0,1],want(0),got(1))]
+154. fuzz_char(in(0), 0, sum_and_first, 2)
+   => fails([0,1],want(1),got(0))
+155. fuzz([const(5),const(5)], swap2, 2)
+   => [0-fails([0,0],want(0),got(5)),1-fails([0,0],want(0),got(5))]
+156. fuzz_char(plus(0,0), 0, double_first, 2)
+   => clean
+157. fuzz([const(2),in(0)], copy, 2)
+   => [0-fails([0,0],want(0),got(2)),1-fails([0,1],want(1),got(0))]
+158. fuzz_char(shift(0,9), 0, double_first, 2)
+   => fails([0,0],want(0),got(9))
+159. fuzz([in(0),const(1)], copy, 2)
+   => [0-clean,1-fails([0,0],want(0),got(1))]
+160. fuzz_char(in(0), 0, double_first, 2)
+   => fails([1,0],want(2),got(1))
+161. fuzz([plus(0,1),plus(1,1)], swap2, 2)
+   => [0-fails([1,0],want(0),got(1)),1-fails([0,1],want(0),got(2))]
+162. fuzz_char(const(8), 0, swap2, 2)
+   => fails([0,0],want(0),got(8))
+163. fuzz([plus(1,0),in(0)], copy, 2)
+   => [0-fails([0,1],want(0),got(1)),1-fails([0,1],want(1),got(0))]
+164. fuzz_char(plus(0,1), 0, swap2, 2)
+   => fails([1,0],want(0),got(1))
+165. fuzz([shift(1,9),const(4)], double_first, 2)
+   => [0-fails([0,0],want(0),got(9)),1-fails([0,0],want(0),got(4))]
+166. fuzz_char(in(0), 0, sum_and_first, 2)
+   => fails([0,1],want(1),got(0))
+167. fuzz([in(0),plus(0,1)], copy, 2)
+   => [0-clean,1-fails([1,0],want(0),got(1))]
+168. fuzz_char(plus(0,0), 0, copy, 2)
+   => fails([1,0],want(1),got(2))
+169. fuzz([const(9),const(2)], swap2, 2)
+   => [0-fails([0,0],want(0),got(9)),1-fails([0,0],want(0),got(2))]
+170. fuzz_char(plus(1,1), 1, swap2, 2)
+   => fails([0,1],want(0),got(2))
+171. fuzz([in(1),const(6)], sum_and_first, 2)
+   => [0-fails([1,0],want(1),got(0)),1-fails([0,0],want(0),got(6))]
+172. fuzz_char(shift(0,5), 1, swap2, 2)
+   => fails([0,0],want(0),got(5))
+173. fuzz([const(2),in(0)], double_first, 2)
+   => [0-fails([0,0],want(0),got(2)),1-fails([1,0],want(2),got(1))]
+174. fuzz_char(plus(0,1), 0, swap2, 2)
+   => fails([1,0],want(0),got(1))
+175. fuzz([shift(1,2),const(3)], double_first, 2)
+   => [0-fails([0,0],want(0),got(2)),1-fails([0,0],want(0),got(3))]
+176. fuzz_char(const(1), 1, swap2, 2)
+   => fails([0,0],want(0),got(1))
+177. fuzz([in(0),shift(0,1)], double_first, 2)
+   => [0-fails([1,0],want(2),got(1)),1-fails([0,0],want(0),got(1))]
+178. fuzz_char(const(4), 1, swap2, 2)
+   => fails([0,0],want(0),got(4))
+179. fuzz([shift(1,9),shift(1,2)], swap2, 2)
+   => [0-fails([0,0],want(0),got(9)),1-fails([0,0],want(0),got(2))]
+180. fuzz_char(const(2), 0, copy, 2)
+   => fails([0,0],want(0),got(2))
+181. fuzz([in(1),const(9)], swap2, 2)
+   => [0-clean,1-fails([0,0],want(0),got(9))]
+182. fuzz_char(plus(0,1), 0, sum_and_first, 2)
+   => clean
+183. fuzz([plus(1,0),const(6)], double_first, 2)
+   => [0-fails([0,1],want(0),got(1)),1-fails([0,0],want(0),got(6))]
+184. fuzz_char(shift(0,2), 0, swap2, 2)
+   => fails([0,0],want(0),got(2))
+185. fuzz([shift(0,7),plus(1,0)], copy, 2)
+   => [0-fails([0,0],want(0),got(7)),1-fails([1,0],want(0),got(1))]
+186. fuzz_char(in(1), 0, sum_and_first, 2)
+   => fails([1,0],want(1),got(0))
+187. fuzz([shift(1,6),plus(1,0)], copy, 2)
+   => [0-fails([0,0],want(0),got(6)),1-fails([1,0],want(0),got(1))]
+188. fuzz_char(plus(1,1), 1, copy, 2)
+   => fails([0,1],want(1),got(2))
+189. fuzz([const(6),in(0)], sum_and_first, 2)
+   => [0-fails([0,0],want(0),got(6)),1-clean]
+190. fuzz_char(shift(1,5), 1, double_first, 2)
+   => fails([0,0],want(0),got(5))
+191. fuzz([shift(0,6),shift(0,8)], copy, 2)
+   => [0-fails([0,0],want(0),got(6)),1-fails([0,0],want(0),got(8))]
+192. fuzz_char(shift(0,5), 0, double_first, 2)
+   => fails([0,0],want(0),got(5))
+193. fuzz([plus(0,1),const(1)], sum_and_first, 2)
+   => [0-clean,1-fails([0,0],want(0),got(1))]
+194. fuzz_char(plus(0,1), 1, copy, 2)
+   => fails([1,0],want(0),got(1))
+195. fuzz([const(4),plus(1,0)], double_first, 2)
+   => [0-fails([0,0],want(0),got(4)),1-fails([0,1],want(0),got(1))]
+196. fuzz_char(in(1), 0, double_first, 2)
+   => fails([0,1],want(0),got(1))
+197. fuzz([const(1),plus(1,1)], copy, 2)
+   => [0-fails([0,0],want(0),got(1)),1-fails([0,1],want(1),got(2))]
+198. fuzz_char(const(4), 1, double_first, 2)
+   => fails([0,0],want(0),got(4))
+199. fuzz([in(1),in(0)], sum_and_first, 2)
+   => [0-fails([1,0],want(1),got(0)),1-clean]
+200. fuzz_char(const(7), 1, double_first, 2)
+   => fails([0,0],want(0),got(7))
