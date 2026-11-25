@@ -1,6 +1,7 @@
 % plopfuzz: fuzz-test each output character on its own. A set of per-character programs is
-% checked against a reference for the whole output; each character is tested over inputs that
-% vary only what it reads, so a bug is pinned to the character that has it, with the smallest
+% checked against a reference for the whole output; each character is tested on every input of the given
+% length (a character's right value may depend on inputs its formula does not read, and that is often
+% the bug), so a bug is pinned to the character that has it, with the smallest
 % input that shows it, and characters without bugs are reported clean.
 % Reference functions: whole-output functions on lists of 0..9.
 %?- fuzz([in(1), in(0)], swap2, 2, R).                       % R = [0-clean, 1-clean]
